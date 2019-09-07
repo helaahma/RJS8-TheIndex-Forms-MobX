@@ -38,7 +38,7 @@ class AuthorForm extends Component {
               <span className="input-group-text">First Name</span>
             </div>
             <input
-              onChange={event => this.textChangeHandler(event)}
+              onChange={this.textChangeHandler}
               type="text"
               className="form-control"
               name="first_name"
@@ -49,7 +49,7 @@ class AuthorForm extends Component {
               <span className="input-group-text">Last Name</span>
             </div>
             <input
-              onChange={event => this.textChangeHandler(event)}
+              onChange={this.textChangeHandler}
               type="text"
               className="form-control"
               name="last_name"

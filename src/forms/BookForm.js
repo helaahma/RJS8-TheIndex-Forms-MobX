@@ -6,12 +6,11 @@ import bookStore from "../stores/bookStore";
 class BookForm extends Component {
   state = {
     title: "",
-    color: "",
-    authors: []
+    color: ""
   };
   submitBook = async event => {
     event.preventDefault();
-    await bookStore.addBook(this.state);
+    await bookStore.addBook(this.state, this.props.author);
     if (!bookStore.errors) {
       this.props.closeModal();
     }
@@ -33,13 +32,13 @@ class BookForm extends Component {
           )}
 
           <input
-            onChange={event => this.bookHandler(event)}
+            onChange={this.bookHandler}
             type="text"
             className="form-control"
             name="title"
           />
 
-          <select name="color" onChange={event => this.bookHandler(event)}>
+          <select name="color" onChange={this.bookHandler}>
             <option value="red">Red</option>
             <option selected value="white">
               White
@@ -49,7 +48,7 @@ class BookForm extends Component {
           </select>
           <br />
           <br />
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit Book" />
         </form>
       </div>
     );

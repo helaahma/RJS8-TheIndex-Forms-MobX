@@ -14,6 +14,8 @@ class BookStore {
 
   loading = true;
 
+  authors = [];
+
   fetchBooks = async () => {
     try {
       const res = await instance.get(
@@ -26,13 +28,19 @@ class BookStore {
       console.error(err);
     }
   };
+  //it says bad request because we didnt send ID therefore modify newbook in line# 33
   addBook = async (newBook, author) => {
+    //This means we added author attribure to newBook with a value if author.id
+    newBook.authors = [author.id];
     try {
-      const res = await instance.post("/api/books/", newBook, author);
-      const books = res.data;
-      console.log(books);
-      this.books.unshift(books);
+      const res = await instance.post("/api/books/", newBook);
+      const book = res.data;
+      console.log(book);
+      this.books.push(book);
+      this.books.unshift(book);
       this.errors = null;
+      //add the new book to author.books
+      author.books.push(book.id);
     } catch (err) {
       this.errors = errToArray(err.response.data);
     }

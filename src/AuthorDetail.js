@@ -2,6 +2,7 @@ import React from "react";
 
 // Components
 import BookTable from "./BookTable";
+import { observer } from "mobx-react";
 
 // Stores
 import authorStore from "./stores/authorStore";
@@ -25,10 +26,13 @@ const AuthorDetail = props => {
           alt={authorName}
         />
       </div>
+      {/* see bookStore.js line# 43 to see what changed */}
       <BookTable books={books} />
-      <AddBookModal />
+      {/* we want to send it to book form */}
+      {/*initially we used props.author however it was not defined therefore we used author in line number 13 */}
+      <AddBookModal author={author} />
     </div>
   );
 };
 
-export default AuthorDetail;
+export default observer(AuthorDetail);
